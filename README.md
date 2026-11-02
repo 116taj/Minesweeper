@@ -1,17 +1,13 @@
 # Minesweeper
 
-A desktop version of Minesweeper, written in C++ with Qt. Personal project from
-January 2024.
+Minesweeper for desktop, written in C++ with Qt. January 2024.
 
-The rules are the standard ones. Every tile hides either a mine or a number
-saying how many mines touch it. Left click uncovers a tile, right click puts a
-flag on one you believe is a mine, and uncovering every tile that is not a mine
-wins the game. Uncovering a tile with no mines around it opens the whole empty
-area next to it in one move, so the board unfolds in patches rather than tile by
-tile. The toolbar keeps a mine count, a flag count, and a timer that starts on
-your first click.
+Standard rules. Left click uncovers a tile, right click flags one. Clear every
+tile that isn't a mine and you win. Uncovering a tile with nothing around it
+opens up the empty area next to it. The toolbar shows the mine count, how many
+flags you have placed, and a timer that starts on your first click.
 
-Three board sizes are selectable from the toolbar:
+Three board sizes in the dropdown:
 
 | Size | Mines |
 | --- | --- |
@@ -21,7 +17,7 @@ Three board sizes are selectable from the toolbar:
 
 ## Building
 
-Requires Qt 5.14 or newer and a C++ compiler.
+Needs Qt 5.14 or newer.
 
 ```sh
 qmake Minesweeper.pro
@@ -29,23 +25,21 @@ make
 ./Minesweeper
 ```
 
-Or open `Minesweeper.pro` in Qt Creator and build from there.
+Or open `Minesweeper.pro` in Qt Creator.
 
 ## Repository layout
 
 ```
 main.cpp             Entry point
-mainwindow.*         Window, toolbar, timer, and grid redrawing
-grid.*               Board state, mine placement, reveal and flag rules, win and lose checks
-tile.*               One tile: what is under it, whether it is revealed or flagged
-multiclickbutton.*   QPushButton that reports right clicks as well as left ones
-mainwindow.ui        Qt Designer layout for the window
+mainwindow.*         Window, toolbar, timer, redrawing the grid
+grid.*               Board, mines, reveal and flag rules, win and lose checks
+tile.*               One tile: what is under it, revealed, flagged
+multiclickbutton.*   QPushButton that also reports right clicks
+mainwindow.ui        Qt Designer layout
 ```
 
 ## Future work
 
-- Mines are placed before the first click, so the first tile you open can be a
-  mine. Placing them after the opening move would fix that.
-- Board sizes are three fixed presets. A custom row, column, and mine count
-  would be more useful.
+- Mines are placed before the first click, so your first tile can be a mine.
+- Three preset sizes only. Custom rows, columns and mine count would be better.
 - Nothing is saved between runs, so there are no best times.
